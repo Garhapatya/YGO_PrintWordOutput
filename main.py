@@ -5,7 +5,6 @@ from PIL import Image, ImageTk
 import requests
 from io import BytesIO
 import time
-import re
 
 from function import *
 
