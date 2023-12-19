@@ -10,4 +10,4 @@
 程序内置的ocg卡图地址来自我的服务器，带宽比较小，如果遇到图片加载不出来属于正常现象，建议前往下列地址下载完整版本地图片解压到程序根目录/picture使用
 https://ygobbs.com/t/%E6%B8%B8%E6%88%8F%E7%8E%8B%E9%AB%98%E6%B8%85%E6%97%A5%E8%AF%AD%E5%8D%A1%E5%9B%BE/143511
 
-![预览](https://www.example.com/logo.png)
+![预览](https://raw.githubusercontent.com/Garhapatya/YGO_PrintWordOutput/main/docs/%E9%A2%84%E8%A7%88.png)https://raw.githubusercontent.com/Garhapatya/YGO_PrintWordOutput/main/docs/%E9%A2%84%E8%A7%88.png)
