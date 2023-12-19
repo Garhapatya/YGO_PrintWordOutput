@@ -1,0 +1,1 @@
+pic_address = http://124.220.46.228/ygopicture/

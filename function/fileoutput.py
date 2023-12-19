@@ -5,6 +5,8 @@ from docx.shared import Cm
 import tkinter as tk
 from tkinter import messagebox
 
+from function import card_pic
+
 def newdocx(Cards:list,DocName:str) ->str:
 
     
@@ -28,7 +30,7 @@ def newdocx(Cards:list,DocName:str) ->str:
     count=0
     for Card in Cards:
         try:
-            run.add_picture(".\\picture\\"+Card[0]+".jpg", width=Cm(5.9),height=Cm(8.6))
+            run.add_picture(card_pic.card_address(Card[0]), width=Cm(5.9),height=Cm(8.6))
         except FileNotFoundError:
             run.add_picture(".\\resouse\\"+"missingcardpic"+".jpg", width=Cm(5.9),height=Cm(8.6))
             #卡图缺少的卡片会使用“暂无卡图”样式图片代替

@@ -22,8 +22,7 @@ def search(name:str,page = 1) -> list:
     #print(cards_info)
 
     if len(cards_info)==0 :
-        blank = []
-        return blank
+        return []
         #递归终点，如果正则没检索到东西就代表没有下一页了
 
     tuples = []

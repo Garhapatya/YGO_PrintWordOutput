@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
+import requests
+from io import BytesIO
 import time
 
-from function import search,fileoutput
+from function import search,fileoutput,card_pic
 
 
 result = []
@@ -11,7 +13,12 @@ card = None
 pack = []
 
 def imageforTK(image:str):
-    image = Image.open(image)
+    try:
+        image = Image.open(image)
+    except OSError:
+        response = requests.get(image)
+        image = Image.open(BytesIO(response.content))
+
     image.thumbnail((200, 290))
     return ImageTk.PhotoImage(image)
 #将jpg转换成tkinter可以识别的图像形式
@@ -32,7 +39,7 @@ def display(event=''):
     global card
     card = result[resultslist.curselection()[0]]
     try:
-        photo = imageforTK('.\\picture\\'+card[0]+'.jpg')
+        photo = imageforTK(card_pic.card_address(card[0]))
     except FileNotFoundError:
          photo = imageforTK('.\\resouse\\missingcardpic.jpg')
     pic.config(image=photo)
