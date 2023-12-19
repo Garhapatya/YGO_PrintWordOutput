@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from . import search
 from . import fileoutput
 from .getconfig import pic_address

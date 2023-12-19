@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import ttk
 import PIL
@@ -14,7 +15,7 @@ pack = []
 
 
 def getimage(code:str):
-    image = Image.open('.\\resouse\\missingcardpic.jpg')
+    image = Image.open('.\\resource\\missingcardpic.jpg')
     for i in pic_address:
         try:
             image = Image.open(i+code+'.jpg')
@@ -56,7 +57,7 @@ def display(event=''):
     pic.config(image=photo)
     pic.image = photo
     
-#调用卡图展示
+#展示选中卡
 
 def addcard(t=1):
     global pack
@@ -99,7 +100,11 @@ root = tk.Tk()
 root.title('ygo简易打印样板生成')
 root.geometry("850x500")
 root.minsize(850,500)
-#root.iconbitmap('.//resouse//L.ico')
+
+icon = Image.open('.//resource//L.ico')
+icon = ImageTk.PhotoImage(icon)
+root.iconphoto(True,icon)
+#root.iconbitmap('.//resource//L.ico')
 
 root.grid_rowconfigure(0,weight=1)
 root.grid_columnconfigure([0,1,2],weight=1)
@@ -149,7 +154,7 @@ resultslist.bind("<<ListboxSelect>>", display)
 yl = ttk.LabelFrame(targetblock,text='卡图')
 yl.pack(anchor='center',pady=20)
 
-photo = imageforTK(Image.open('.\\resouse\\cardback.jpg'))
+photo = imageforTK(Image.open('.\\resource\\cardback.jpg'))
 
 pic = tk.Label(yl,width=200,height=290)
 pic.config(image=photo)

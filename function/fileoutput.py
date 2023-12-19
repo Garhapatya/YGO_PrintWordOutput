@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import docx
 from docx import Document
 from docx.shared import Cm
@@ -15,7 +16,7 @@ def newdocx(Cards:list,DocName:str) ->str:
 
     
     try:
-        docu = Document(".\\resouse\\预设样板.docx")
+        docu = Document(".\\resource\\预设样板.docx")
     except docx.opc.exceptions.PackageNotFoundError:
         docu = Document()
         docu.sections[0].page_width = Cm(21)
@@ -24,7 +25,7 @@ def newdocx(Cards:list,DocName:str) ->str:
         docu.sections[0].right_margin = Cm(1.27)
         docu.sections[0].top_margin = Cm(0.45)
         docu.sections[0].bottom_margin = Cm(0.45)
-        docu.save(".\\resouse\\预设样板.docx")
+        docu.save(".\\resource\\预设样板.docx")
 
     para = docu.add_paragraph()
     run = para.add_run('\n')
