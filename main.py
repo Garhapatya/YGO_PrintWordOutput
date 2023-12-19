@@ -1,24 +1,38 @@
 import tkinter as tk
 from tkinter import ttk
+import PIL
 from PIL import Image, ImageTk
 import requests
 from io import BytesIO
 import time
+import re
 
-from function import search,fileoutput,card_pic
-
+from function import *
 
 result = []
 card = None
 pack = []
 
-def imageforTK(image:str):
-    try:
-        image = Image.open(image)
-    except OSError:
-        response = requests.get(image)
-        image = Image.open(BytesIO(response.content))
 
+def getimage(code:str):
+    image = Image.open('.\\resouse\\missingcardpic.jpg')
+    for i in pic_address:
+        try:
+            image = Image.open(i+code+'.jpg')
+            break
+        except FileNotFoundError:
+            pass
+        except OSError:
+            response = requests.get(i+code+'.jpg')
+            if response.status_code == 200:
+                image = Image.open(BytesIO(response.content))
+                break
+        
+        
+    
+    return image
+
+def imageforTK(image):
     image.thumbnail((200, 290))
     return ImageTk.PhotoImage(image)
 #将jpg转换成tkinter可以识别的图像形式
@@ -38,10 +52,8 @@ def display(event=''):
 
     global card
     card = result[resultslist.curselection()[0]]
-    try:
-        photo = imageforTK(card_pic.card_address(card[0]))
-    except FileNotFoundError:
-         photo = imageforTK('.\\resouse\\missingcardpic.jpg')
+    
+    photo = imageforTK(getimage(card[0]))
     pic.config(image=photo)
     pic.image = photo
     
@@ -138,7 +150,7 @@ resultslist.bind("<<ListboxSelect>>", display)
 yl = ttk.LabelFrame(targetblock,text='卡图')
 yl.pack(anchor='center',pady=20)
 
-photo = imageforTK('.\\resouse\\cardback.jpg')
+photo = imageforTK(Image.open('.\\resouse\\cardback.jpg'))
 
 pic = tk.Label(yl,width=200,height=290)
 pic.config(image=photo)

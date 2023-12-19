@@ -1,1 +1,15 @@
+#card_address 卡片地址，指向jpg格式的卡图文件，仅支持本地地址
+#card_address 类似 pic_address,但搜索时会将图片文件名视作卡名纳入搜索结果
+#建议将自己的DIY卡图文件夹路径添加为 card_address 且卡图文件名直接使用卡名
+#文件名同时作为卡名和卡密使用，请避免出现与其他卡片卡密冲突的情况
+
+card_address = DIY/
+
+
+
+#pic_address 图源地址，指向jpg格式的卡图文件，支持本地地址和url
+#可以设置多个pic_addresss
+#搜索图片时按先后顺序遍历所有地址，尽量把本地或延迟更低的地址置前
+
+#pic_address = picture/
 pic_address = http://124.220.46.228/ygopicture/

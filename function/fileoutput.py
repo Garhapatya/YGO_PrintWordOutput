@@ -2,10 +2,14 @@ import docx
 from docx import Document
 from docx.shared import Cm
 
+import tempfile
+import requests
+
 import tkinter as tk
 from tkinter import messagebox
 
-from function import card_pic
+from function.getconfig import pic_address
+
 
 def newdocx(Cards:list,DocName:str) ->str:
 
@@ -28,12 +32,29 @@ def newdocx(Cards:list,DocName:str) ->str:
 
     
     count=0
+    temp_dir = tempfile.TemporaryDirectory()
     for Card in Cards:
-        try:
-            run.add_picture(card_pic.card_address(Card[0]), width=Cm(5.9),height=Cm(8.6))
-        except FileNotFoundError:
-            run.add_picture(".\\resouse\\"+"missingcardpic"+".jpg", width=Cm(5.9),height=Cm(8.6))
-            #卡图缺少的卡片会使用“暂无卡图”样式图片代替
+        
+        flag = False
+        for i in pic_address:
+            try:
+                run.add_picture(i+Card[0]+'.jpg', width=Cm(5.9),height=Cm(8.6))
+                flag = True
+                break
+            except FileNotFoundError:
+                pass
+            except OSError:
+                response = requests.get(i+Card[0]+'.jpg')
+                if response.status_code == 200:
+                    with open(temp_dir.name+Card[0]+'.jpg', 'wb') as f:
+                        f.write(response.content)
+                    run.add_picture(temp_dir.name+Card[0]+'.jpg', width=Cm(5.9),height=Cm(8.6))
+                    flag = True
+                    break
+
+
+            
+                
         
         count+=1
         if count==3:
@@ -49,6 +70,8 @@ def newdocx(Cards:list,DocName:str) ->str:
             break
         except PermissionError:
                 messagebox.showwarning("保存失败","检查并确认无其他进程占用该文件并重试")
+
+    temp_dir.cleanup()
                 
 
 
