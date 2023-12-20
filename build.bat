@@ -1,7 +1,7 @@
 pyinstaller --icon="resource/L.ico"^
             --onefile^
             --windowed^
-            --name=YgoPDC^
+            --name=YgoPDO^
             --distpath ./YgoPDC/^
             --hidden-import=tkinter^
             --hidden-import=PIL^
